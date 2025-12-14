@@ -1,0 +1,253 @@
+body {
+	background-color: #f8f9fa;
+	color: #343a40;
+}
+
+.header {
+	background: linear-gradient(90deg, #FFECD2 0%, #FCB69F 100%);
+}
+
+.header.fixed {
+	z-index: 10;
+	position: sticky;
+	top: -30px;
+}
+
+.header .body {
+	display: flex;
+	padding: 20px 0 6px 0;
+	align-items: center;
+	margin-bottom: 32px;
+}
+
+.header .logo {
+	display: flex;
+	align-items: center;
+}
+
+.header .logo img {
+	height: 90px;
+	width: 90px;
+}
+
+.header .logo .title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #2c3e50;
+	margin-left: 12px;
+}
+
+.header .nav .nav-links {
+	list-style: none;
+	display: flex;
+	gap: 30px;
+}
+
+.header .nav .nav-links a {
+	text-decoration: none;
+	color: #6c757d;
+	font-weight: 600;
+	padding-bottom: 5px;
+}
+
+.nav .nav-links a.active, .nav .nav-links a:hover {
+	color: #343a40;
+	border-bottom: 2px solid #007bff;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.profile .avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 2px solid #ddd;
+	object-fit: cover;
+}
+
+.profile span {
+	color: #2b2d42;
+}
+
+/* --- 2. Layout Trang Tìm kiếm (Giữ nguyên) --- */
+.search-page-layout {
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	gap: 30px;
+	padding: 30px 0;
+}
+
+/* --- 3. Cột Lọc (Giữ nguyên) --- */
+
+
+
+/* --- 4. Khu vực Kết quả & Sắp xếp (Giữ nguyên) --- */
+.results-area {
+	min-width: 0;
+}
+
+.sort-bar {
+	background: #fff;
+	padding: 15px 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sort-bar .results-count {
+	font-weight: 600;
+}
+
+.sort-bar .sort-options {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+
+
+/************************************************************/
+/* --- 5. LƯỚI HIỂN THỊ PHÒNG (ĐÃ CẬP NHẬT THEO ẢNH) --- */
+/************************************************************/
+
+/* Chuyển từ grid 2-3 cột thành 1 cột danh sách */
+.room-grid {
+	display: grid;
+	grid-template-columns: 1fr; /* Mỗi card 1 hàng */
+	gap: 20px;
+}
+
+/* Đây là CSS mới cho thẻ .room-card */
+.room-card {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+	transition: all 0.3s ease;
+	display: flex; /* Chuyển sang layout ngang */
+	padding: 15px; /* Thêm padding cho thẻ */
+	gap: 20px; /* Khoảng cách giữa ảnh và nội dung */
+}
+
+.room-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Ảnh bên trái */
+.card-image {
+	width: 200px; /* Kích thước cố định */
+	height: 200px;
+	flex-shrink: 0; /* Không cho ảnh bị bóp */
+	border-radius: 10px; /* Bo góc ảnh như trong hình */
+	overflow: hidden;
+}
+
+.card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Nội dung bên phải */
+.card-content {
+	flex: 1; /* Chiếm hết phần còn lại */
+	display: grid;
+	/* Chia nội dung làm 2 cột như trong ảnh */
+	grid-template-columns: 2fr 1fr;
+	gap: 10px;
+}
+
+/* Tiêu đề (chiếm cả 2 cột) */
+.card-title {
+	grid-column: 1/-1; /* Trải dài 2 cột */
+	font-size: 1.9rem;
+	font-weight: 700;
+	color: #007bff; /* Màu xanh giống ảnh */
+	margin-top: 5px;
+}
+
+/* Cột thông tin chính (bên trái) */
+.card-info-main {
+	display: flex;
+	flex-direction: column;
+	gap: 8px; /* Khoảng cách giữa các dòng thông tin */
+	font-size: 1.3rem;
+	line-height: 16px;
+}
+
+.card-info-main p {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #6c757d;
+}
+
+.card-info-main p i {
+	width: 16px; /* Căn chỉnh icon */
+	text-align: center;
+	color: #343a40;
+}
+
+/* Giá thuê màu đỏ */
+.card-price {
+	font-weight: 700;
+	color: #dc3545 !important; /* Dùng !important để ghi đè */
+}
+
+/* Cột thông tin phụ (bên phải) */
+.card-info-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 1.3rem;
+	line-height: 16px;
+	color: #6c757d;
+}
+
+.card-info-meta p {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.card-info-meta p i {
+	width: 16px;
+	text-align: center;
+	color: #343a40;
+}
+
+/* --- 6. Phân trang (Giữ nguyên) --- */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+	list-style: none;
+	gap: 8px;
+}
+
+.pagination a {
+	text-decoration: none;
+	color: #343a40;
+	background: #fff;
+	border: 1px solid #dee2e6;
+	padding: 10px 15px;
+	border-radius: 8px;
+	font-weight: 600;
+}
+
+.pagination a:hover, .pagination a.active {
+	background: #007bff;
+	color: #fff;
+	border-color: #007bff;
+}

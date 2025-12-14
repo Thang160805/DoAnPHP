@@ -1,0 +1,114 @@
+
+.header {
+    padding-top: 10px;
+    text-align: center;
+    background: linear-gradient(90deg, #FFECD2 0%, #FCB69F 100%);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 6px;
+
+}
+.header.fixed {
+  z-index: 10;
+  position: sticky;
+  top: -30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.logo img{
+    width: 100px;
+    height: auto;
+}
+
+.logo h2{
+    color: #2c3e50;
+    font-size: 28px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.nav a{
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 18px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    color: #666;
+    font-weight: 500;
+}
+
+.nav .btn-login{
+    background-color: #696FC7;
+    color: #fff;
+}
+
+.nav a:hover{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.choise-buttons{
+     display: flex;
+    gap: 15px; /* Khoảng cách giữa 2 nút */
+    margin-bottom: 60px;
+}
+
+.hero-content{
+    flex-grow: 1; /* Chiếm phần còn lại của màn hình */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    padding: 150px 0;
+    text-align: center;
+}
+
+.choise-buttons .btn{
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #fff;
+    background-color: #27ae60; /* Màu xanh lá cây (như ảnh) */
+    border: 2px solid #27ae60;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.choise-buttons .btn:hover{
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    transform: translateY(-2px);
+}
+
+.hero-content .tilte{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.hero-content .tilte i{
+  font-size: 36px;
+  color: #2d72cb;
+  margin-right: 7px;
+}
+
+.hero-content .tilte h3{
+  font-size: 20px;
+  font-weight: 700;
+  color: #010001;
+}
+
+.hero-content .info p{
+  font-size: 14px;
+  color: #4a4a4a;
+  line-height: 1.5;
+}
+
+
+
+
+
+

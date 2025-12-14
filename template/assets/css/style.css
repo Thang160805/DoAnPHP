@@ -1,0 +1,213 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Sora", sans-serif;
+}
+
+
+  :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-color: #dee2e6;
+            --header-bg: #fff7f2; /* Màu nền header của bạn */
+            --danger-color: #dc3545; /* Màu đỏ cho giá */
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+  --font-footer:"Open Sans", sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+.header {
+  background: linear-gradient(90deg, #FFECD2 0%, #FCB69F 100%);
+}
+
+.header.fixed {
+  z-index: 10;
+  position: sticky;
+  top: -30px;
+}
+
+.header .body {
+  display: flex;
+  padding: 20px 0 6px 0;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo img {
+    height: 90px;
+    width: 90px;
+}
+
+.header .logo .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-left: 12px;
+}
+
+.header .nav .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+  .header .nav .nav-links a {
+            text-decoration: none;
+            color: #6c757d;
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+        
+        .nav .nav-links a.active,
+        .nav .nav-links a:hover {
+            color: #343a40;
+            border-bottom: 2px solid #007bff;
+        }
+
+
+
+.header .action-link {
+    color: #2f3a3b;
+    margin-left: 160px;
+    text-align: center;
+}
+
+.header .action-btn {
+    display: inline-block;
+    min-width: 108px;
+    border: 1px solid #1EBFC1;
+    text-align: center;
+    color: #1EBFC1;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-left: 24px;
+    padding: 0 16px;
+    line-height: 46px;
+    cursor: pointer;
+}
+
+.header .action-btn:hover{
+    background-color: #1EBFC1;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.profile .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  object-fit: cover;
+}
+
+.profile span {
+    color: #2b2d42;
+}
+
+/* footer */
+.footer {
+    margin-top: 60px;
+    padding-top: 60px;
+    background-color: #10375c;
+}
+
+.footer__top {
+    display: grid;
+    grid-template-columns: 0.6fr 0.6fr 0.6fr 1fr;
+    column-gap: 78px;
+    border-bottom: 1px solid #406181;
+    padding-bottom: 30px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 150px;
+  width: 150px;
+}
+
+
+
+.footer__heading {
+    line-height: 28px;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+.footer__column a{
+  color: rgba(255, 255, 255, 0.5); /* text-white-50 */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+
+.social-icons {
+  display: flex;               /* xếp ngang các icon */    /* căn giữa ngang (có thể đổi sang start/end) */
+  gap: 15px;                   /* khoảng cách giữa các icon */
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Màu riêng cho từng mạng xã hội */
+.facebook {
+  background-color: #1877f2;
+}
+
+.zalo {
+  background-color: #0180c7;
+}
+
+.Tiktok {
+  background: linear-gradient(135deg, #25f4ee 0%, #000000 50%, #fe2c55 100%);
+}
+
+.youtube {
+  background-color: #ff0000;
+}
+
+/* Hiệu ứng khi hover */
+.social-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}

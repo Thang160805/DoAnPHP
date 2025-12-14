@@ -1,0 +1,640 @@
+.room-title {
+	font-size: 2.2rem;
+	font-weight: 700;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+/* 3. Bố cục 2 cột */
+.room-detail-container {
+	display: flex;
+	flex-wrap: wrap; /* Cho phép xuống hàng trên mobile */
+	gap: 30px;
+}
+
+.main-content {
+	flex: 2; /* Chiếm 2/3 không gian */
+	min-width: 300px; /* Đảm bảo không bị co quá nhỏ */
+}
+
+.sidebar {
+	flex: 1; /* Chiếm 1/3 không gian */
+	min-width: 280px;
+}
+
+/* 3.1. Bộ sưu tập ảnh */
+.image-gallery .main-image img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16/10; /* Giữ tỷ lệ ảnh */
+	object-fit: cover;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+}
+
+.image-gallery .thumbnails {
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
+	flex-wrap: wrap;
+}
+
+.image-gallery .thumb {
+	width: 90px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 4px;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: border-color 0.2s;
+}
+
+.image-gallery .thumb:hover, .image-gallery .thumb.active {
+	border-color: #003366;
+}
+
+/* 3.2. Thông tin tổng quan */
+.overview {
+	padding: 20px 0;
+	margin: 20px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 20px;
+}
+
+.overview .price {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #d00000;
+	flex-basis: 100%; /* Giá luôn nằm trên 1 hàng */
+}
+
+.overview .info-item {
+	font-size: 1rem;
+	color: #555;
+}
+
+.overview .info-item i {
+	color: #003366;
+	margin-right: 8px;
+	width: 20px;
+	text-align: center;
+}
+
+.overview .btn-view-map {
+	margin-left: auto;
+	padding: 8px 15px;
+	background: none;
+	border: 1px solid #003366;
+	color: #003366;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.2s;
+}
+
+.overview .btn-view-map:hover {
+	background: #003366;
+	color: #fff;
+}
+
+/* 3.3. & 3.4. & 3.5. Các khu vực nội dung */
+.description, .amenities, .map {
+	margin-bottom: 30px;
+}
+
+.description h2, .amenities h2, .map h2, .similar-listings h2 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 15px;
+	border-bottom: 2px solid #003366;
+	padding-bottom: 5px;
+	display: inline-block;
+}
+
+.description p {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #444;
+	margin-bottom: 15px;
+}
+
+.amenities ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 15px;
+}
+
+.amenities li {
+	font-size: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.amenities li i {
+	color: #003366;
+	font-size: 1.2rem;
+	width: 25px;
+	text-align: center;
+}
+
+/* 3.5. Bản đồ */
+.map iframe {
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	aspect-ratio: 16/9; /* Giữ tỷ lệ cho responsive */
+	width: 100%;
+	height: auto;
+}
+
+/* 3.6. Sidebar - Box thông tin chủ trọ */
+.sidebar .owner-box {
+	background: #f4f4f4;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 25px 20px;
+	text-align: center;
+	/* Hiệu ứng dính (sticky) khi cuộn */
+	top: 20px;
+}
+
+.owner-box .avatar {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	margin-bottom: 10px;
+}
+
+.owner-box .owner-name {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #333;
+}
+
+.owner-box .owner-role {
+	font-size: 0.9rem;
+	color: #777;
+	margin-bottom: 20px;
+}
+
+.owner-box .btn {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 12px;
+	border: none;
+	border-radius: 5px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 0.2s;
+	text-align: left; /* Căn lề trái cho icon và chữ */
+}
+
+.owner-box .btn i {
+	margin-right: 10px;
+	width: 20px;
+	text-align: center;
+}
+
+.owner-box .btn:hover {
+	opacity: 0.85;
+}
+
+.owner-box .btn-phone {
+	background-color: #d00000; /* Màu đỏ nổi bật */
+	color: #fff;
+}
+
+.owner-box .btn-zalo {
+	background-color: #0068FF; /* Màu xanh Zalo */
+	color: #fff;
+}
+
+.owner-box .btn-save {
+	background-color: #fff;
+	color: #d00000;
+	border: 1px solid #003366;
+}
+
+/* 3.7. Thông tin bài đăng */
+.sidebar .post-meta {
+	margin-top: 20px;
+	padding: 15px;
+	background: #f9f9f9;
+	border-radius: 8px;
+	font-size: 0.9rem;
+}
+
+.sidebar .post-meta p {
+	margin: 8px 0;
+	color: #555;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.sidebar .post-meta i {
+	color: #888;
+}
+
+/* 3.8. Chia sẻ & Báo cáo */
+.sidebar .share-report {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.share-report .share-buttons {
+	margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.share-report .social-icon {
+	font-size: 1.5rem;
+	color: #777;
+	text-decoration: none;
+}
+
+.share-report .social-icon:hover {
+	color: #003366;
+}
+
+.share-report .report-link {
+	font-size: 0.9rem;
+	color: #999;
+	text-decoration: none;
+}
+
+.share-report .report-link:hover {
+	color: #d00000;
+	text-decoration: underline;
+}
+
+/* 4. Tin đăng tương tự */
+.similar-listings {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+}
+/* Bạn có thể tái sử dụng grid từ trang chủ */
+.listings-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 20px;
+}
+
+.comment-list-container {
+	padding: 24px 30px;
+	border-bottom: 1px solid #eee;
+}
+
+.comment-list-container h2 {
+	font-size: 20px;
+	color: #111;
+	margin-top: 0;
+	margin-bottom: 25px;
+}
+
+/* Mỗi mục bình luận */
+.comment-item {
+	display: flex;
+	align-items: flex-start; /* Căn avatar lên trên cùng */
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.comment-item:last-child {
+	margin-bottom: 0;
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+/* Avatar */
+.comment-avatar {
+	margin-right: 15px;
+}
+
+.comment-avatar img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%; /* Làm avatar hình tròn */
+	object-fit: cover; /* Chống méo hình */
+	border: 1px solid #eee;
+}
+
+/* Nội dung (bên phải avatar) */
+.comment-content {
+	flex: 1; /* Chiếm hết phần còn lại */
+}
+
+.comment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.user-name {
+	font-weight: 600;
+	font-size: 15px;
+	color: #222;
+}
+
+/* Thêm nhãn "Shop" */
+.shop-badge {
+	background-color: #ee4d2d; /* Màu cam của Shopee */
+	color: white;
+	font-size: 10px;
+	padding: 2px 6px;
+	border-radius: 3px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.timestamp {
+	font-size: 13px;
+	color: #888;
+}
+
+/* Đánh giá sao */
+.star-rating {
+	margin-bottom: 8px;
+	font-size: 15px;
+	color: #f5a623; /* Màu vàng cam */
+}
+
+.star-rating span:last-child {
+	color: #ddd; /* Sao rỗng */
+}
+
+/* Văn bản bình luận */
+.comment-text {
+	font-size: 15px;
+	color: #444;
+	margin: 0 0 12px 0;
+}
+
+/* Chân bình luận (Like/Reply) */
+.comment-footer {
+	display: flex;
+	gap: 10px;
+}
+
+.comment-footer button {
+	background-color: #f7f7f7;
+	border: 1px solid #ddd;
+	color: #555;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 13px;
+	font-family: inherit;
+	transition: background-color 0.2s;
+}
+
+.comment-footer button:hover {
+	background-color: #eee;
+}
+
+/* Bình luận trả lời (lồng nhau) */
+.comment-reply {
+	margin-top: 20px;
+	padding-left: 20px;
+	border-left: 2px solid #e9e9e9;
+}
+
+/* Điều chỉnh avatar cho bình luận trả lời nhỏ hơn */
+.comment-reply .comment-avatar img {
+	width: 35px;
+	height: 35px;
+}
+
+/* ============================
+   KHUNG VIẾT BÌNH LUẬN
+   ============================ */
+.comment-form-container {
+	padding: 24px 30px;
+	background-color: #fafafa;
+}
+
+.comment-form-container h2 {
+	font-size: 20px;
+	color: #111;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.form-group textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-family: inherit;
+	font-size: 15px;
+	box-sizing: border-box;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	resize: vertical;
+	min-height: 100px;
+}
+
+.form-group textarea:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.submit-btn {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 12px 20px;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+	background-color: #0056b3;
+}
+
+.back-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 18px;
+	background: linear-gradient(135deg, #fafafa, #eaeaea);
+	border: 1px solid #d4d4d4;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: 500;
+	color: #333;
+	text-decoration: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+	transition: all 0.25s ease;
+	margin-bottom: 30px
+}
+
+.back-btn:hover {
+	background: linear-gradient(135deg, #ffffff, #f2f2f2);
+	border-color: #bbb;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+	transform: translateY(-2px);
+}
+
+.back-btn i {
+	font-size: 16px;
+	color: #555;
+}
+
+.like-btn.liked {
+	background-color: #ffcc00;
+	color: #000;
+}
+
+/* --- CSS NÚT THUÊ TRỌ --- */
+.owner-box .btn-rent {
+	background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+	/* Màu gradient xanh hiện đại */
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.1rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	border: none;
+	box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4); /* Đổ bóng phát sáng */
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+	transition: all 0.3s ease;
+}
+
+.owner-box .btn-rent:hover {
+	transform: translateY(-3px); /* Nổi lên khi di chuột */
+	box-shadow: 0 8px 20px rgba(56, 239, 125, 0.6);
+	background: linear-gradient(135deg, #0e857b 0%, #2ccb68 100%);
+}
+
+.owner-box .btn-rent i {
+	margin-right: 10px;
+	animation: wiggle 2s linear infinite; /* Icon rung lắc nhẹ */
+}
+
+/* Hiệu ứng rung cho icon chìa khóa */
+@keyframes wiggle { 0%, 7% {
+	transform: rotateZ(0);
+}
+
+15%
+{
+transform
+:
+rotateZ(
+-15deg
+);
+}
+20%
+{
+transform
+:
+rotateZ(
+10deg
+);
+}
+25%
+{
+transform
+:
+rotateZ(
+-10deg
+);
+}
+30%
+{
+transform
+:
+rotateZ(
+6deg
+);
+}
+35%
+{
+transform
+:
+rotateZ(
+-4deg
+);
+}
+40%
+,
+100%
+{
+transform
+:
+rotateZ(
+0
+);
+}
+}
+
+/* --- CSS CHO MODAL (POPUP) --- */
+.rent-modal .modal-header {
+	background-color: #003366;
+	color: white;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.rent-modal .modal-title {
+	font-weight: bold;
+}
+
+.rent-modal .close {
+	color: white;
+	opacity: 0.8;
+}
+
+.rent-modal .form-label {
+	font-weight: 600;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.rent-modal .btn-confirm {
+	width: 100%;
+	background-color: #d00000;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.rent-modal .btn-confirm:hover {
+	background-color: #b00000;
+}

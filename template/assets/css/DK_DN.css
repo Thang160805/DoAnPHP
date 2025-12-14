@@ -1,0 +1,266 @@
+/* --- CÀI ĐẶT CƠ BẢN --- */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* Ngăn cuộn trang */
+}
+
+/* --- BỐ CỤC CHIA ĐÔI --- */
+.split-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- PHẦN BÊN TRÁI (VISUAL) --- */
+.split-left {
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(30, 85, 170, 0.8), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    animation: slideInLeft 1s ease-out;
+}
+
+.welcome-text {
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+.welcome-text h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.welcome-text p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --- PHẦN BÊN PHẢI (FORM) --- */
+.split-right {
+    flex-basis: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeInRight 1s ease-out;
+}
+
+/* --- CÁC THÀNH PHẦN FORM --- */
+.back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #555;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    margin-bottom: 15px;
+}
+.back-link:hover {
+    color: #007bff;
+}
+
+
+.auth-form-container h2 {
+    text-align: center;
+    color: #222;
+    margin-top: 0;
+    margin-top: 15px;
+    margin-bottom: 2rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+/* Nhóm Input mới (với icon) */
+.input-group {
+    position: relative;
+    margin-bottom: 1rem; /* Giảm margin để nhét span lỗi vào */
+}
+
+.input-group i {
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1.1rem;
+    position: absolute;
+    top: 24px;
+    left: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px; /* Tăng padding trái */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+     text-indent: 12px;
+    font-size: 1.2rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+.input-group .option-role{
+    position: absolute;
+    top: 25px;
+}
+
+.input-group select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    padding-left: 20px;
+    color: #aaa;
+    font-size: 1.2rem;
+}
+
+.input-group select:focus {
+    border-color: #6a5acd;
+}
+
+
+
+
+.form-options {
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+
+.forgot-password {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.15rem;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* --- NÚT BẤM --- */
+.btn {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* Nút mạng xã hội */
+.divider {
+    text-align: center;
+    margin: 2rem 0;
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.social-login {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-social {
+    flex: 1;
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+}
+.btn-social:hover {
+    background-color: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.btn-google i { color: #DB4437; }
+.btn-facebook i { color: #1877F2; }
+
+/* Link chuyển đổi */
+.toggle-link {
+    text-align: center;
+    margin-top: 1.7rem;
+    font-size: 1.15rem;
+}
+.toggle-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- HIỆU ỨNG ANIMATION --- */
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- RESPONSIVE CHO DI ĐỘNG --- */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+    .split-left {
+        flex-basis: 200px; /* Thu nhỏ phần visual */
+        min-height: 200px;
+    }
+    .welcome-text h1 { font-size: 2rem; }
+    .welcome-text p { font-size: 1rem; }
+    
+    .split-right {
+        flex-basis: auto;
+        height: 100%;
+        overflow-y: auto; /* Cho phép cuộn form nếu không đủ */
+    }
+    .auth-form-container {
+        padding: 2rem;
+        box-shadow: none; /* Bỏ shadow trên di động */
+    }
+}
