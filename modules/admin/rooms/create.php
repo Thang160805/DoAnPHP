@@ -1,4 +1,11 @@
 <?php
+session_start();
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+if (!isset($_SESSION['username'])) {
+  header('Location: ../../modules/auth/login.php'); exit;
+}
 /* CHẶN USER THƯỜNG – CHỈ ADMIN */
 require_once __DIR__ . "/../auth.php";
 
@@ -67,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         if (move_uploaded_file($tmpName, $uploadPath)) {
                             // Lưu đường dẫn đầy đủ hoặc chỉ tên file tùy vào cách hiển thị
-                            $anhChinh = '/ThuNghiem/template/assets/img/' . $newFileName;
+                            $anhChinh = '/CaseStudy/template/assets/img/' . $newFileName;
                         } else {
                             $error = "❌ Upload ảnh thất bại!";
                         }
@@ -293,7 +300,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 <div class="mb-4">
                                     <label class="form-label d-block">⚙️ Tiện ích đi kèm</label>
-                                    <div class="bg-white border rounded p-3" style="max-height: 400px; overflow-y: auto;">
+                                    <div class="bg-white border rounded p-3"
+                                        style="max-height: 400px; overflow-y: auto;">
                                         <?php 
                                         if(isset($resultUtilities) && mysqli_num_rows($resultUtilities) > 0) {
                                             mysqli_data_seek($resultUtilities, 0);
@@ -335,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (this.files && this.files[0]) {
             var file = this.files[0];
-            
+
             // Kiểm tra kích thước (5MB)
             if (file.size > 5 * 1024 * 1024) {
                 alert('Ảnh quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.');

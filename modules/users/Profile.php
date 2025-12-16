@@ -1,12 +1,10 @@
 <?php
-session_start(); // PHẢI ở dòng đầu tiên của mọi file có dùng session
-// (Tùy chọn) Có thể cho phép cache private, nhưng an toàn nhất khi debug là tắt:
+session_start();
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
 if (!isset($_SESSION['username'])) {
-    header('Location: ../../modules/auth/login.php');
-    exit;
+  header('Location: ../../modules/auth/login.php'); exit;
 }
 
 
@@ -17,7 +15,6 @@ require_once __DIR__ . "/../../includes/funtions.php";
 $TenDangNhap = $_SESSION['username'];
 $user = getTaiKhoan($TenDangNhap);
 
-// Lấy lịch sử thuê trọ (trạng thái 2: đang thuê, 4: đã trả phòng)
 $userId = $user['id'];
 $sqlLichSu = "
     SELECT 
@@ -51,12 +48,11 @@ mysqli_stmt_close($stmtLichSu);
 
 
 
-// Hiển thị avatar (URL hoặc local)
 $avatar = $user['Avatar'];
 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
     $src = $avatar;
 } else {
-    $src = '/ThucHanhPHP/template/assets/img/' . $avatar; // đường dẫn URL
+    $src = '/CaseStudy/template/assets/img/' . $avatar;
 }
 ?>
 <!DOCTYPE html>
@@ -200,12 +196,12 @@ if (filter_var($avatar, FILTER_VALIDATE_URL)) {
                     <section id="lich-su-thue" class="content-section">
                         <h2>Lịch sử thuê trọ</h2>
                         <?php if (empty($lichSuThue)): ?>
-                            <div style="text-align: center; padding: 40px; color: #6b7280;">
-                                <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
-                                <p style="font-size: 16px;">Bạn chưa có lịch sử thuê trọ nào.</p>
-                            </div>
+                        <div style="text-align: center; padding: 40px; color: #6b7280;">
+                            <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                            <p style="font-size: 16px;">Bạn chưa có lịch sử thuê trọ nào.</p>
+                        </div>
                         <?php else: ?>
-                            <?php foreach ($lichSuThue as $item): 
+                        <?php foreach ($lichSuThue as $item): 
                                 $imgSrc = $item['AnhChinh'];
                                 // Xử lý đường dẫn ảnh
                                 if (strpos($imgSrc, 'http') === 0) {
@@ -227,43 +223,44 @@ if (filter_var($avatar, FILTER_VALIDATE_URL)) {
                                 $trangThai = (int)$item['trang_thai'];
                                 $isDangThue = ($trangThai == 2); // 2 = đang thuê, 4 = đã trả phòng
                             ?>
-                            <div class="listing-card">
-                                <img src="<?= htmlspecialchars($displayImg) ?>" 
-                                     alt="<?= htmlspecialchars($item['title']) ?>"
-                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'150\'%3E%3Crect fill=\'%23ddd\' width=\'200\' height=\'150\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'14\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EKhông có ảnh%3C/text%3E%3C/svg%3E';">
-                                <div class="listing-info">
-                                    <h4><?= htmlspecialchars($item['title']) ?></h4>
-                                    <div class="price"><?= number_format($item['price']) ?> VNĐ/tháng</div>
-                                    <div style="margin-top: 8px; font-size: 14px; color: #6b7280;">
-                                        <p><i class="fas fa-ruler-combined"></i> Diện tích: <?= $item['DienTich'] ?>m²</p>
-                                        <p><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($item['DiaChi']) ?></p>
-                                    </div>
-                                    <div class="rental-date">
-                                        <strong>Ngày thuê:</strong> <?= date('d/m/Y', strtotime($item['ngay_vao'])) ?><br>
-                                        <strong>Thời hạn:</strong> <?= $thoiHan ?> tháng<br>
-                                        <strong>Ngày trả phòng dự kiến:</strong> 
-                                        <?php if ($isDangThue): ?>
-                                            <span style="color: #22c55e; font-weight: 600;"><?= $ngayTra->format('d/m/Y') ?> (Đang thuê)</span>
-                                        <?php else: ?>
-                                            <span style="color: #6b7280;"><?= $ngayTra->format('d/m/Y') ?> (Đã trả phòng)</span>
-                                        <?php endif; ?>
-                                    </div>
+                        <div class="listing-card">
+                            <img src="<?= htmlspecialchars($displayImg) ?>"
+                                alt="<?= htmlspecialchars($item['title']) ?>"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'150\'%3E%3Crect fill=\'%23ddd\' width=\'200\' height=\'150\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'14\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EKhông có ảnh%3C/text%3E%3C/svg%3E';">
+                            <div class="listing-info">
+                                <h4><?= htmlspecialchars($item['title']) ?></h4>
+                                <div class="price"><?= number_format($item['price']) ?> VNĐ/tháng</div>
+                                <div style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+                                    <p><i class="fas fa-ruler-combined"></i> Diện tích: <?= $item['DienTich'] ?>m²</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($item['DiaChi']) ?>
+                                    </p>
                                 </div>
-                                <div class="listing-actions">
-                                    <a href="ChiTietPhongTro.php?id=<?= $item['phong_id'] ?>" class="btn-action review">
-                                        <?= $isDangThue ? 'Xem chi tiết' : 'Xem lại' ?>
-                                    </a>
+                                <div class="rental-date">
+                                    <strong>Ngày thuê:</strong> <?= date('d/m/Y', strtotime($item['ngay_vao'])) ?><br>
+                                    <strong>Thời hạn:</strong> <?= $thoiHan ?> tháng<br>
+                                    <strong>Ngày trả phòng dự kiến:</strong>
                                     <?php if ($isDangThue): ?>
-                                    <a href="TraPhong.php?yeucau_id=<?= $item['id'] ?>&phong_id=<?= $item['phong_id'] ?>" 
-                                       class="btn-action review" 
-                                       style="background: #ef4444; margin-top: 8px;"
-                                       onclick="return confirm('Bạn có chắc chắn muốn trả phòng này?');">
-                                        <i class="fas fa-door-open me-1"></i> Trả phòng
-                                    </a>
+                                    <span style="color: #22c55e; font-weight: 600;"><?= $ngayTra->format('d/m/Y') ?>
+                                        (Đang thuê)</span>
+                                    <?php else: ?>
+                                    <span style="color: #6b7280;"><?= $ngayTra->format('d/m/Y') ?> (Đã trả phòng)</span>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <?php endforeach; ?>
+                            <div class="listing-actions">
+                                <a href="ChiTietPhongTro.php?id=<?= $item['phong_id'] ?>" class="btn-action review">
+                                    <?= $isDangThue ? 'Xem chi tiết' : 'Xem lại' ?>
+                                </a>
+                                <?php if ($isDangThue): ?>
+                                <a href="TraPhong.php?yeucau_id=<?= $item['id'] ?>&phong_id=<?= $item['phong_id'] ?>"
+                                    class="btn-action review" style="background: #ef4444; margin-top: 8px;"
+                                    onclick="return confirm('Bạn có chắc chắn muốn trả phòng này?');">
+                                    <i class="fas fa-door-open me-1"></i> Trả phòng
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </section>
                 </div>

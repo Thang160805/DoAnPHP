@@ -23,10 +23,10 @@ if ($page < 1 || $page > $totalPage) {
 $rooms = getListNewRoom($page);
 
 
-$pageStr1 = $_GET['pageRC'] ?? 1;
+$pageStr1 = $_GET['pageMV'] ?? 1;
 $pageSize1 = 4;
 
-$totalCount1 = getTotalCountRoomCheap(); 
+$totalCount1 = getTotalCountRoomMaxView(); 
 $totalPage1 = ceil($totalCount1 / $pageSize1);
 
 $page1 = (int)$pageStr1;
@@ -34,7 +34,20 @@ if ($page1 < 1 || $page1 > $totalPage1) {
     $page1 = 1;
 }
 
-$rooms1 = getListRoomCheap($page1);
+$rooms1 = getListRoomMaxView($page1);
+
+
+$pageStr2 = $_GET['pageDHV'] ?? 1;
+$pageSize2 = 4;
+$totalCount2 = getTotalCountRoomGanDHV(); 
+$totalPage2 = ceil($totalCount2 / $pageSize2);
+
+$page2 = (int)$pageStr2;
+if ($page2 < 1 || $page2 > $totalPage2) {
+    $page2 = 1;
+}
+
+$rooms2 = getListRoomGanDHV($page2);
 
 $TenDangNhap = $_SESSION['username'];
 $user = getTaiKhoan($TenDangNhap);
@@ -43,7 +56,7 @@ $avatar = $user['Avatar'];
 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
     $src = $avatar;
 } else {
-    $src = '/ThucHanhPHP/template/assets/img/' . $avatar;
+    $src = '/CaseStudy/template/assets/img/' . $avatar;
 }
 ?>
 <!DOCTYPE html>
@@ -157,7 +170,7 @@ if (filter_var($avatar, FILTER_VALIDATE_URL)) {
 
     <section class="container new-room">
         <div class="body">
-            <h1>Phòng trọ giá rẻ</h1>
+            <h1>Phòng trọ lượt xem nhiều</h1>
             <div class="grid-room">
                 <?php foreach($rooms1 as $room1){ ?>
                 <div class="room-card">
@@ -201,7 +214,61 @@ if (filter_var($avatar, FILTER_VALIDATE_URL)) {
             </div>
             <nav class="pagination">
                 <?php for($i=1;$i<= $totalPage1;$i++){ ?>
-                <a href="./home.php?pageRC=<?php echo $i ?>" class="<?php echo ($i == $page1 ? "active" : "")  ?>">
+                <a href="./home.php?pageMV=<?php echo $i ?>" class="<?php echo ($i == $page1 ? "active" : "")  ?>">
+                    <?php echo $i ?></a>
+                <?php }?>
+            </nav>
+        </div>
+
+    </section>
+
+    <section class="container new-room">
+        <div class="body">
+            <h1>Phòng trọ gần Trường Đại học Vinh</h1>
+            <div class="grid-room">
+                <?php foreach($rooms2 as $room2){ ?>
+                <div class="room-card">
+                    <a href="ChiTietPhongTro.php?id=<?php echo $room2['id'] ?>" class="d-flex">
+                        <!-- left -->
+                        <div class="img-room">
+                            <img src="<?php echo $room2['AnhChinh']  ?>" alt>
+                        </div>
+                        <!-- right -->
+                        <div class="info-room">
+                            <h3 class="card-title">
+                                <?php echo $room2['title'] ?></h3>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="card-content">
+
+                                    <div class="card-info-main">
+                                        <p><i class="fas fa-user"></i> Người đăng:
+                                            <?php echo $room2['HoTen'] ?></p>
+                                        <p><i class="fas fa-ruler-combined"></i> Diện tích:
+                                            <?php echo $room2['DienTich'] ?>m²</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Địa chỉ:
+                                            <?php echo $room2['DiaChi'] ?></p>
+                                        <p class="card-price"><i class="fas fa-dollar-sign"></i> Giá
+                                            thuê:
+                                            <?php echo formatCurrency($room2['price']) ?></p>
+                                    </div>
+
+                                    <div class="card-info-meta">
+                                        <p><i class="fas fa-clock"></i>
+                                            <?php echo timeAgo($room2['NgayDang']) ?></p>
+                                        <p><i class="fas fa-eye"></i> Lượt xem:
+                                            <?php echo $room2['Luotxem'] ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+            <nav class="pagination">
+                <?php for($i=1;$i<= $totalPage2;$i++){ ?>
+                <a href="./home.php?pageDHV=<?php echo $i ?>" class="<?php echo ($i == $page2 ? "active" : "")  ?>">
                     <?php echo $i ?></a>
                 <?php }?>
             </nav>

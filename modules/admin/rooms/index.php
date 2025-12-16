@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . "/../giaodien/navbar.php";
 require_once __DIR__ . "/../../../includes/database.php";
 
@@ -24,7 +25,7 @@ $rs = mysqli_query($conn, $sql);
     border-radius:10px;
     font-weight:600;
 ">
-➕ Thêm phòng
+    ➕ Thêm phòng
 </a>
 
 <table style="
@@ -47,7 +48,7 @@ $rs = mysqli_query($conn, $sql);
     </thead>
 
     <tbody>
-    <?php while ($r = mysqli_fetch_assoc($rs)): ?>
+        <?php while ($r = mysqli_fetch_assoc($rs)): ?>
         <tr style="border-top:1px solid #e5e7eb">
             <td style="padding:12px;text-align:center">
                 <?= $r['id'] ?>
@@ -99,26 +100,29 @@ $rs = mysqli_query($conn, $sql);
                 <a href="edit.php?id=<?= $r['id'] ?>">✏️ Sửa</a> |
 
                 <?php if ($r['TrangThai'] == 1): ?>
-                    <a href="toggle.php?id=<?= $r['id'] ?>&action=hide"
-                       onclick="return confirm('Ẩn phòng này khỏi trang người dùng?');">
-                       👁️‍🗨️ Ẩn
-                    </a>
+                <a href="toggle.php?id=<?= $r['id'] ?>&action=hide"
+                    onclick="return confirm('Ẩn phòng này khỏi trang người dùng?');">
+                    👁️‍🗨️ Ẩn
+                </a>
                 <?php else: ?>
-                    <a href="toggle.php?id=<?= $r['id'] ?>&action=show"
-                       onclick="return confirm('Hiện lại phòng này?');">
-                       👁️ Hiện
-                    </a>
+                <a href="toggle.php?id=<?= $r['id'] ?>&action=show" onclick="return confirm('Hiện lại phòng này?');">
+                    👁️ Hiện
+                </a>
                 <?php endif; ?>
 
                 | <a href="delete.php?id=<?= $r['id'] ?>"
-                     onclick="return confirm('Bạn có chắc chắn muốn xóa phòng này không?');"
-                     style="color:#dc2626;font-weight:600">
-                     ❌ Xóa
-                  </a>
+                    onclick="return confirm('Bạn có chắc chắn muốn xóa phòng này không?');"
+                    style="color:#dc2626;font-weight:600">
+                    ❌ Xóa
+                </a>
             </td>
         </tr>
-    <?php endwhile; ?>
+        <?php endwhile; ?>
     </tbody>
 </table>
 
-</div></div></body></html>
+</div>
+</div>
+</body>
+
+</html>

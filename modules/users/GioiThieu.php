@@ -1,6 +1,5 @@
 <?php
-session_start(); // PHẢI ở dòng đầu tiên của mọi file có dùng session
-// (Tùy chọn) Có thể cho phép cache private, nhưng an toàn nhất khi debug là tắt:
+session_start();
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -17,7 +16,7 @@ $avatar = $user['Avatar'];
 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
     $src = $avatar;
 } else {
-    $src = '/ThucHanhPHP/template/assets/img/' . $avatar;
+    $src = '/CaseStudy/template/assets/img/' . $avatar;
 }
 
 ?>

@@ -12,4 +12,3 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 0) {
     header("Location: ../users/home.php");
     exit;
 }
-

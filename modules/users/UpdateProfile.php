@@ -1,15 +1,10 @@
 <?php
 session_start();
-
-// Chặn cache
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
-
-// Chưa đăng nhập
 if (!isset($_SESSION['username'])) {
-    header('Location: ../../modules/auth/login.php');
-    exit;
+  header('Location: ../../modules/auth/login.php'); exit;
 }
 
 require_once __DIR__ . "/../../includes/database.php";
@@ -28,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
    ======================== */
 
 $HoTen  = trim($_POST['HoTen'] ?? '');
-$Email  = trim($_POST['Email'] ?? '');
 $Phone  = trim($_POST['Phone'] ?? '');
 $DiaChi = trim($_POST['DiaChi'] ?? '');
 
@@ -40,6 +34,28 @@ if ($HoTen === '') {
     exit;
 }
 
+
+if ($Phone === '') {
+    $_SESSION['message'] = 'Vui lòng nhập số điện thoại!';
+    $_SESSION['message_type'] = 'error';
+    header('Location: Profile.php');
+    exit;
+}
+
+
+if (!preg_match('/^[0-9]{10}$/', $Phone)) {
+    $_SESSION['message'] = 'Số điện thoại phải gồm đúng 10 chữ số và không chứa ký tự!';
+    $_SESSION['message_type'] = 'error';
+    header('Location: Profile.php');
+    exit;
+}
+
+if ($DiaChi === '') {
+    $_SESSION['message'] = 'Vui lòng nhập địa chỉ!';
+    $_SESSION['message_type'] = 'error';
+    header('Location: Profile.php');
+    exit;
+}
 
 
 $data = [

@@ -1,4 +1,11 @@
 <?php
+session_start();
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+if (!isset($_SESSION['username'])) {
+  header('Location: ../../modules/auth/login.php'); exit;
+}
 require_once __DIR__ . "/../giaodien/navbar.php";
 require_once __DIR__ . "/../../../includes/database.php";
 
@@ -60,7 +67,7 @@ if (!$r) {
 ">← Quay lại</a>
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-    
+
     <!-- Thông tin phòng trọ -->
     <div style="
         background: #fff;
@@ -68,10 +75,11 @@ if (!$r) {
         border-radius: 14px;
         box-shadow: 0 10px 25px rgba(0,0,0,.05);
     ">
-        <h3 style="margin-bottom: 20px; color: #1f2937; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+        <h3
+            style="margin-bottom: 20px; color: #1f2937; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
             🏠 Thông tin phòng trọ
         </h3>
-        
+
         <?php if ($r['AnhChinh']): ?>
         <img src="<?= htmlspecialchars($r['AnhChinh']) ?>" alt="Phòng trọ" style="
             width: 100%;
@@ -81,42 +89,45 @@ if (!$r) {
             margin-bottom: 16px;
         ">
         <?php endif; ?>
-        
+
         <div style="margin-bottom: 12px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Tiêu đề:</strong>
-            <span style="color: #1f2937; font-weight: 600; font-size: 18px;"><?= htmlspecialchars($r['ten_phong']) ?></span>
+            <span
+                style="color: #1f2937; font-weight: 600; font-size: 18px;"><?= htmlspecialchars($r['ten_phong']) ?></span>
         </div>
-        
+
         <div style="margin-bottom: 12px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Địa chỉ:</strong>
             <span style="color: #374151;">📍 <?= htmlspecialchars($r['dia_chi_phong']) ?></span>
         </div>
-        
+
         <div style="margin-bottom: 12px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Diện tích:</strong>
             <span style="color: #374151;"><?= $r['DienTich'] ?> m²</span>
         </div>
-        
+
         <div style="margin-bottom: 12px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Giá thuê:</strong>
-            <span style="color: #22c55e; font-weight: 600; font-size: 20px;"><?= number_format($r['gia_phong']) ?> đ/tháng</span>
+            <span style="color: #22c55e; font-weight: 600; font-size: 20px;"><?= number_format($r['gia_phong']) ?>
+                đ/tháng</span>
         </div>
-        
+
         <?php if ($r['mo_ta_phong']): ?>
         <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Mô tả:</strong>
             <p style="color: #4b5563; line-height: 1.6;"><?= nl2br(htmlspecialchars($r['mo_ta_phong'])) ?></p>
         </div>
         <?php endif; ?>
-        
+
         <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
             <strong style="color: #6b7280; display: block; margin-bottom: 8px;">Chủ trọ:</strong>
             <div style="color: #374151;">👤 <?= htmlspecialchars($r['ten_chu_tro']) ?></div>
-            <div style="color: #6b7280; font-size: 14px; margin-top: 4px;">📞 <?= htmlspecialchars($r['sdt_chu_tro'] ?? 'N/A') ?></div>
+            <div style="color: #6b7280; font-size: 14px; margin-top: 4px;">📞
+                <?= htmlspecialchars($r['sdt_chu_tro'] ?? 'N/A') ?></div>
             <div style="color: #6b7280; font-size: 14px;">✉️ <?= htmlspecialchars($r['email_chu_tro']) ?></div>
         </div>
     </div>
-    
+
     <!-- Thông tin người thuê -->
     <div style="
         background: #fff;
@@ -124,50 +135,52 @@ if (!$r) {
         border-radius: 14px;
         box-shadow: 0 10px 25px rgba(0,0,0,.05);
     ">
-        <h3 style="margin-bottom: 20px; color: #1f2937; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+        <h3
+            style="margin-bottom: 20px; color: #1f2937; font-size: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
             👤 Thông tin người thuê
         </h3>
-        
+
         <div style="margin-bottom: 16px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Họ và tên:</strong>
-            <span style="color: #1f2937; font-weight: 600; font-size: 18px;"><?= htmlspecialchars($r['ten_nguoi_thue']) ?></span>
+            <span
+                style="color: #1f2937; font-weight: 600; font-size: 18px;"><?= htmlspecialchars($r['ten_nguoi_thue']) ?></span>
         </div>
-        
+
         <div style="margin-bottom: 16px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Số điện thoại:</strong>
             <span style="color: #374151;">📞 <?= htmlspecialchars($r['sdt_nguoi_thue'] ?? 'N/A') ?></span>
         </div>
-        
+
         <div style="margin-bottom: 16px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Email:</strong>
             <span style="color: #374151;">✉️ <?= htmlspecialchars($r['email_nguoi_thue']) ?></span>
         </div>
-        
+
         <?php if ($r['dia_chi_nguoi_thue']): ?>
         <div style="margin-bottom: 16px;">
             <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Địa chỉ:</strong>
             <span style="color: #374151;">📍 <?= htmlspecialchars($r['dia_chi_nguoi_thue']) ?></span>
         </div>
         <?php endif; ?>
-        
+
         <div style="margin-top: 24px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
             <h4 style="margin-bottom: 16px; color: #1f2937; font-size: 18px;">📅 Chi tiết yêu cầu</h4>
-            
+
             <div style="margin-bottom: 12px;">
                 <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Ngày dọn vào:</strong>
                 <span style="color: #374151; font-weight: 600;"><?= date('d/m/Y', strtotime($r['ngay_vao'])) ?></span>
             </div>
-            
+
             <div style="margin-bottom: 12px;">
                 <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Thời hạn thuê:</strong>
                 <span style="color: #374151; font-weight: 600;"><?= $r['thoi_gian_thue'] ?> tháng</span>
             </div>
-            
+
             <div style="margin-bottom: 12px;">
                 <strong style="color: #6b7280; display: block; margin-bottom: 4px;">Ngày gửi yêu cầu:</strong>
                 <span style="color: #374151;"><?= date('d/m/Y H:i', strtotime($r['created_at'])) ?></span>
             </div>
-            
+
             <div style="margin-top: 16px;">
                 <strong style="color: #6b7280; display: block; margin-bottom: 8px;">Trạng thái:</strong>
                 <?php
@@ -221,19 +234,19 @@ if (!$r) {
                 ?>
             </div>
         </div>
-        
+
         <?php if ($r['loi_nhan']): ?>
-        <div style="margin-top: 20px; padding: 16px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #6366f1;">
+        <div
+            style="margin-top: 20px; padding: 16px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #6366f1;">
             <strong style="color: #6b7280; display: block; margin-bottom: 8px;">💬 Lời nhắn từ người thuê:</strong>
             <p style="color: #4b5563; line-height: 1.6; margin: 0;"><?= nl2br(htmlspecialchars($r['loi_nhan'])) ?></p>
         </div>
         <?php endif; ?>
-        
+
         <?php if ($status == 0): ?>
         <div style="margin-top: 24px; display: flex; gap: 10px;">
-            <a href="approve.php?id=<?= $r['id'] ?>" 
-               onclick="return confirm('Bạn có chắc chắn muốn duyệt yêu cầu này?');"
-               style="
+            <a href="approve.php?id=<?= $r['id'] ?>"
+                onclick="return confirm('Bạn có chắc chắn muốn duyệt yêu cầu này?');" style="
                    flex: 1;
                    padding: 12px;
                    background: #22c55e;
@@ -243,9 +256,8 @@ if (!$r) {
                    font-weight: 600;
                    text-align: center;
                ">✅ Duyệt yêu cầu</a>
-            <a href="reject.php?id=<?= $r['id'] ?>" 
-               onclick="return confirm('Bạn có chắc chắn muốn từ chối yêu cầu này?');"
-               style="
+            <a href="reject.php?id=<?= $r['id'] ?>"
+                onclick="return confirm('Bạn có chắc chắn muốn từ chối yêu cầu này?');" style="
                    flex: 1;
                    padding: 12px;
                    background: #ef4444;
@@ -260,5 +272,8 @@ if (!$r) {
     </div>
 </div>
 
-</div></div></body></html>
+</div>
+</div>
+</body>
 
+</html>

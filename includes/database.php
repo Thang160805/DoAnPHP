@@ -93,15 +93,14 @@ function getListNewRoom($page): array
 }
 
 
-function getTotalCountRoomCheap(): int
+function getTotalCountRoomMaxView(): int
 {
     global $conn;
 
     $sql = "
         SELECT COUNT(*) AS cnt
         FROM PhongTro
-        WHERE price BETWEEN 0 AND 1500000
-          AND TrangThai = 1
+        WHERE TrangThai = 1
     ";
 
     $result = mysqli_query($conn, $sql);
@@ -112,7 +111,7 @@ function getTotalCountRoomCheap(): int
 }
 
 
-function getListRoomCheap(int $page): array
+function getListRoomMaxView(int $page): array
 {
     global $conn;
 
@@ -124,9 +123,8 @@ function getListRoomCheap(int $page): array
                pt.NgayDang, pt.price, pt.Luotxem, pt.AnhChinh
         FROM PhongTro pt
         JOIN TaiKhoan tk ON pt.Id_ChuTro = tk.id
-        WHERE pt.price BETWEEN 0 AND 1500000
-          AND pt.TrangThai = 1
-        ORDER BY pt.price ASC
+        WHERE pt.TrangThai = 1
+        ORDER BY pt.Luotxem DESC
         LIMIT ?, ?
     ";
 
@@ -138,6 +136,48 @@ function getListRoomCheap(int $page): array
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function getTotalCountRoomGanDHV(): int
+{
+    global $conn;
+
+    $sql = "
+        SELECT COUNT(*) AS cnt
+        FROM PhongTro
+        WHERE TrangThai = 1 and pt.area_id in(6,7)
+    ";
+
+    $result = mysqli_query($conn, $sql);
+    if (!$result) return 0;
+
+    $row = mysqli_fetch_assoc($result);
+    return (int)$row['cnt'];
+}
+
+
+function getListRoomGanDHV(int $page): array
+{
+    global $conn;
+
+    $pageSize = 4;
+    $start = ($page - 1) * $pageSize;
+
+    $sql = "
+        SELECT pt.id, pt.title, tk.HoTen, pt.DienTich, pt.DiaChi,
+               pt.NgayDang, pt.price, pt.Luotxem, pt.AnhChinh
+        FROM PhongTro pt
+        JOIN TaiKhoan tk ON pt.Id_ChuTro = tk.id
+        WHERE pt.TrangThai = 1 and pt.area_id in(6,7)
+        ORDER BY pt.Luotxem DESC
+        LIMIT ?, ?
+    ";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $start, $pageSize);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
 function getTaiKhoan(string $TenDangNhap): ?array
 {
@@ -193,10 +233,10 @@ function buildRoomFilters(array $input): array
     $params = [];
     $types  = '';
 
-    /* ✅ CHỈ HIỂN THỊ PHÒNG ĐÃ DUYỆT */
+    
     $conds[] = 'pt.TrangThai = 1';
 
-    /* 🔍 SEARCH: title + DiaChi + HoTen */
+    
     if (!empty($input['search'])) {
         $conds[] = '(
             pt.title LIKE ?
@@ -211,28 +251,28 @@ function buildRoomFilters(array $input): array
         $types   .= 'sss';
     }
 
-    /* 📍 KHU VỰC */
+   
     if (!empty($input['khuVuc']) && is_numeric($input['khuVuc'])) {
         $conds[] = 'pt.area_id = ?';
         $params[] = (int)$input['khuVuc'];
         $types .= 'i';
     }
 
-    /* 💰 GIÁ */
+    
     if (!empty($input['mucGia']) && is_numeric($input['mucGia'])) {
         $conds[] = 'pt.price <= ?';
         $params[] = (int)$input['mucGia'];
         $types .= 'i';
     }
 
-    /* 📐 DIỆN TÍCH */
+    
     if (!empty($input['dienTich']) && is_numeric($input['dienTich'])) {
         $conds[] = 'pt.DienTich <= ?';
         $params[] = (int)$input['dienTich'];
         $types .= 'i';
     }
 
-    /* 🧩 TIỆN ÍCH (GIỮ NGUYÊN CODE GỐC CỦA BẠN) */
+    
     if (!empty($input['tienIch']) && is_array($input['tienIch'])) {
         $ids = array_map('intval', $input['tienIch']);
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
@@ -263,7 +303,7 @@ function countRoomsWithFilters(array $input): int
 
     [$where, $params, $types] = buildRoomFilters($input);
 
-    // ép điều kiện trạng thái
+   
     $where .= ($where ? " AND " : " WHERE ") . "pt.TrangThai = 1";
 
     $sql = "
@@ -295,7 +335,6 @@ function getListRooms(array $input, ?string $orderBy, ?string $order, int $page)
 
     [$where, $params, $types] = buildRoomFilters($input);
 
-    // ép trạng thái
     $where .= ($where ? " AND " : " WHERE ") . "pt.TrangThai = 1";
 
     $pageSize = 6;
@@ -615,7 +654,51 @@ function themYeuCauThue($id_NguoiThue, $ID_Phong, $NgayVao, $ThoiHanThue, $LoiNh
 }
 
 
+function getYeuCauThueTro(?int $status = null): array
+{
+    global $conn;
 
+    $sql = "
+        SELECT 
+            yct.id,
+            yct.phong_id,
+            yct.nguoi_thue_id,
+            yct.ngay_vao,
+            yct.thoi_gian_thue,
+            yct.loi_nhan,
+            yct.trang_thai,
+            yct.created_at,
+            pt.title AS ten_phong,
+            pt.price AS gia_phong,
+            pt.DiaChi AS dia_chi_phong,
+            tk_nguoi_thue.HoTen AS ten_nguoi_thue,
+            tk_nguoi_thue.Phone AS sdt_nguoi_thue,
+            tk_nguoi_thue.Email AS email_nguoi_thue,
+            tk_chu_tro.HoTen AS ten_chu_tro,
+            tk_chu_tro.Phone AS sdt_chu_tro
+        FROM yeucauthuetro yct
+        JOIN phongtro pt ON yct.phong_id = pt.id
+        JOIN taikhoan tk_nguoi_thue ON yct.nguoi_thue_id = tk_nguoi_thue.id
+        JOIN taikhoan tk_chu_tro ON pt.Id_ChuTro = tk_chu_tro.id
+    ";
+
+    if ($status !== null) {
+        $sql .= " WHERE yct.trang_thai = ?";
+    }
+
+    $sql .= " ORDER BY yct.created_at DESC";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($status !== null) {
+        mysqli_stmt_bind_param($stmt, "i", $status);
+    }
+
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
 
 

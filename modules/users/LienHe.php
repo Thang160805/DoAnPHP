@@ -18,7 +18,7 @@ $avatar = $user['Avatar'];
 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
     $src = $avatar;
 } else {
-    $src = '/ThucHanhPHP/template/assets/img/' . $avatar;
+    $src = '/CaseStudy/template/assets/img/' . $avatar;
 }
 ?>
 <!DOCTYPE html>

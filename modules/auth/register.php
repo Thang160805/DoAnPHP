@@ -14,7 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $VaiTroInput   = $_POST['role'] ?? 'user';
 
     // Gán mã vai trò
-    $VaiTro = ($VaiTroInput === 'landlord') ? 1 : 2; // 1 = chủ trọ, 2 = người dùng
+    if ($VaiTroInput === 'user'){
+        $VaiTro = 2;
+    }
 
     // ⚙️ Kiểm tra dữ liệu rỗng
     if ($TenDangNhap === '' || $Email === '' || $Password === '' || $HoTen === '') {
@@ -31,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ⚙️ Kiểm tra email trùng (nếu muốn)
     elseif (checkEmail($Email)) {
         $message = 'Email đã được sử dụng!';
+    }
+    elseif(strlen($Password) < 6){
+        $message = 'Mật khẩu phải từ 6 kí tự trở lên!';
     }
     else {
         // ✅ Mã hoá mật khẩu
@@ -161,9 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-group">
                         <i class="fa-solid fa-user-gear option-role"></i>
                         <select id="role" name="role" required>
-                            <option value="">Chọn loại tài khoản</option>
                             <option value="user">Tôi đang tìm chỗ ở</option>
-                            <option value="landlord">Tôi cung cấp chỗ ở</option>
                         </select>
                     </div>
 

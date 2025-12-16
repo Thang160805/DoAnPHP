@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . "/giaodien/navbar.php";
 require_once __DIR__ . "/../../includes/database.php";
 
@@ -40,7 +41,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
             <div class="stat-value"><?= $totalRooms ?></div>
         </div>
     </div>
-    
+
     <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
         <div class="stat-icon">⏳</div>
         <div class="stat-content">
@@ -48,7 +49,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
             <div class="stat-value"><?= $pendingRooms ?></div>
         </div>
     </div>
-    
+
     <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
         <div class="stat-icon">👤</div>
         <div class="stat-content">
@@ -56,7 +57,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
             <div class="stat-value"><?= $totalNguoiThue ?></div>
         </div>
     </div>
-    
+
     <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
         <div class="stat-icon">👤</div>
         <div class="stat-content">
@@ -64,7 +65,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
             <div class="stat-value"><?= $totalChutro ?></div>
         </div>
     </div>
-    
+
     <div class="stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
         <div class="stat-icon">📋</div>
         <div class="stat-content">
@@ -75,7 +76,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
             <?php endif; ?>
         </div>
     </div>
-    
+
     <div class="stat-card" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
         <div class="stat-icon">📅</div>
         <div class="stat-content">
@@ -147,14 +148,14 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
 }
 
 .stat-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
 }
 
 .stat-icon {
@@ -181,7 +182,7 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
 
 .stat-badge {
     font-size: 11px;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
     padding: 4px 10px;
     border-radius: 12px;
     margin-top: 8px;
@@ -190,4 +191,8 @@ $totalRequests = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FR
 }
 </style>
 
-</div></div></body></html>
+</div>
+</div>
+</body>
+
+</html>

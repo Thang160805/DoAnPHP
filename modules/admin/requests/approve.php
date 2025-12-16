@@ -1,4 +1,11 @@
 <?php
+session_start();
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+if (!isset($_SESSION['username'])) {
+  header('Location: ../../modules/auth/login.php'); exit;
+}
 require_once __DIR__ . "/../auth.php";
 require_once __DIR__ . "/../../../includes/database.php";
 
@@ -65,7 +72,7 @@ try {
     // Commit transaction
     mysqli_commit($conn);
     
-    $_SESSION['success'] = "Đã duyệt yêu cầu thuê trọ thành công! Phòng đã được đánh dấu là đã thuê (Trạng thái: 2).";
+    $_SESSION['success'] = "Đã duyệt yêu cầu thuê trọ thành công!";
 } catch (Exception $e) {
     // Rollback nếu có lỗi
     mysqli_rollback($conn);
@@ -74,4 +81,3 @@ try {
 
 header("Location: index.php");
 exit;
-
